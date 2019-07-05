@@ -1,0 +1,9 @@
+﻿namespace VsmacHelper.Shared
+{
+    public interface ICliCommandResult
+    {
+        int ExitCode { get; set; }
+        string StandardOutput { get; set; }
+        string StandardError { get; set; }
+    }
+}

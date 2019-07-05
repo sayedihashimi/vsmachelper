@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VsmacHelper", "VsmacHelper\VsmacHelper.csproj", "{783F100B-77E8-4119-9336-985AE9B3CF7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VsmacHelper.Shared", "VsmacHelper.Shared\VsmacHelper.Shared.csproj", "{D838640B-468B-4C2D-910F-8BE5F44B2C58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VsmacHelper.Tests", "VsmacHelper.Tests\VsmacHelper.Tests.csproj", "{5E984DB9-D0F0-4AEC-9E33-697F5E6F952F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +17,13 @@ Global
 		{783F100B-77E8-4119-9336-985AE9B3CF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{783F100B-77E8-4119-9336-985AE9B3CF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{783F100B-77E8-4119-9336-985AE9B3CF7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D838640B-468B-4C2D-910F-8BE5F44B2C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D838640B-468B-4C2D-910F-8BE5F44B2C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D838640B-468B-4C2D-910F-8BE5F44B2C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D838640B-468B-4C2D-910F-8BE5F44B2C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E984DB9-D0F0-4AEC-9E33-697F5E6F952F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E984DB9-D0F0-4AEC-9E33-697F5E6F952F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E984DB9-D0F0-4AEC-9E33-697F5E6F952F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E984DB9-D0F0-4AEC-9E33-697F5E6F952F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
