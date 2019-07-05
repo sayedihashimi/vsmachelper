@@ -5,7 +5,7 @@ namespace VsmacHelper.Shared
 {
     public interface ICliCommand
     {
-        string FileName { get; set; }
+        string Command { get; set; }
         string Arguments { get; set; }
         string WorkingDirectory { get; set; }
         string Username { get; set; }

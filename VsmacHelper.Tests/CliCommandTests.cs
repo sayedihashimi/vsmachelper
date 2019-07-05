@@ -1,5 +1,7 @@
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 using VsmacHelper.Shared;
 using Xunit;
 
@@ -12,22 +14,44 @@ namespace VsmacHelper.Tests
         {
             CliCommand cmd = new CliCommand
             {
-                FileName="dotnet",
+                Command ="dotnet",
                 Arguments = "--version"
             };
 
-            try
+
+            var result = await cmd.RunCommand();
+            Assert.NotNull(result);
+            Assert.Equal(0, result.ExitCode);
+            Assert.NotEmpty(result.StandardOutput);
+            Assert.Empty(result.StandardError);
+        }
+
+        [Fact]
+        public async Task TestMissingCommand()
+        {
+            CliCommand cmd = new CliCommand
             {
-                var result = await cmd.RunCommand();
-                Assert.NotNull(result);
-                Assert.Equal(0, result.ExitCode);
-                Assert.NotEmpty(result.StandardOutput);
-            }
-            catch(Exception ex)
+                Command = "doesntexistsayedha",
+                Arguments = "something here"
+            };
+
+            var result = await cmd.RunCommand();
+            Assert.NotNull(result);
+            Assert.NotNull(result.Exception);
+        }
+
+        [Fact]
+        public async Task TestInvalidArgsCommand()
+        {
+            var cmd = new CliCommand
             {
-                var msg = ex.ToString();
-                Console.WriteLine(msg);
-            }
+                Command = "dotnet",
+                Arguments = "invalidargshere"
+            };
+            var result = await cmd.RunCommand();
+            Assert.NotNull(result);
+            Assert.NotNull(result.StandardError);
+            Assert.NotEqual(0, result.ExitCode);
         }
     }
 }

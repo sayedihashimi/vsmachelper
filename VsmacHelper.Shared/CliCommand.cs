@@ -9,24 +9,24 @@ namespace VsmacHelper.Shared
 {
     public class CliCommand : ICliCommand
     {
-        public string FileName { get; set; }
+        public string Command { get; set; }
         public string Arguments { get; set; }
-        public string WorkingDirectory { get; set; }
+        public string WorkingDirectory { get; set; } = Directory.GetCurrentDirectory();
         public string Username { get; set; }
         public string Password { get; set; }
         public ProcessWindowStyle WindowStyle { get; set; } = ProcessWindowStyle.Hidden;
         public bool CreateNoWindow { get; set; } = true;
         public int TimeoutMilliseconds { get; set; }
 
-
         public async Task<ICliCommandResult> RunCommand()
         {
             var startInfo = new ProcessStartInfo
             {
-                FileName = FileName,
+                FileName = Command,
                 CreateNoWindow = CreateNoWindow,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
+                WorkingDirectory = WorkingDirectory
             };
 
             if (!string.IsNullOrWhiteSpace(Arguments))
@@ -43,26 +43,37 @@ namespace VsmacHelper.Shared
                 startInfo.PasswordInClearText = Password;
             }
 
-            var cmdProcess = Process.Start(startInfo);
-
-
-            if (TimeoutMilliseconds > 0)
+            string stdout = null;
+            string stderr = null;
+            Exception exception = null;
+            Process cmdProcess = null;
+            try
             {
-                cmdProcess.WaitForExit(TimeoutMilliseconds);
+                cmdProcess = Process.Start(startInfo);
+
+                if (TimeoutMilliseconds > 0)
+                {
+                    cmdProcess.WaitForExit(TimeoutMilliseconds);
+                }
+                else
+                {
+                    cmdProcess.WaitForExit();
+                }
+
+                stdout = await cmdProcess.StandardOutput.ReadToEndAsync();
+                stderr = await cmdProcess.StandardError.ReadToEndAsync();
             }
-            else
+            catch(Exception ex)
             {
-                cmdProcess.WaitForExit();
+                exception = ex;
             }
-            
-            var stdout = await cmdProcess.StandardOutput.ReadToEndAsync();
-            var stderr = await cmdProcess.StandardError.ReadToEndAsync();
 
             ICliCommandResult result = new CliCommandResult
             {
-                ExitCode = cmdProcess.ExitCode,
+                ExitCode = cmdProcess != null ? cmdProcess.ExitCode : -1,
                 StandardOutput = stdout,
-                StandardError = stderr
+                StandardError = stderr,
+                Exception = exception
             };
             return result;
         }
