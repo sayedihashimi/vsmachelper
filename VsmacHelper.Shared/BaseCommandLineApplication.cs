@@ -15,8 +15,9 @@ namespace VsmacHelper.Shared
 
             if (enableVerboseOption)
             {
-                this.Option("--verbose", "Enable verbose logging", CommandOptionType.NoValue);
+                VerboseOption = this.Option("--verbose", "Enable verbose logging", CommandOptionType.NoValue);
             }
         }
+        protected CommandOption VerboseOption { get; private set; }
     }
 }
