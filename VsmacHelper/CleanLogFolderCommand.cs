@@ -14,6 +14,7 @@ using VsmacHelper.Shared.Extensions;
 namespace VsmacHelper {
     public class CleanLogFolderCommand : BaseCommandLineApplication {
         public CleanLogFolderCommand() : base("CleanLogFolder", "This will clean the log folder") {
+            // command options
             var argLogFolderPath = this.Option(
                 "-l|--logfolderroot <PATH>",
                 "defines that path to the root folder containg the log files. Default value: '~/Library/Logs/VisualStudio/'",
@@ -26,7 +27,6 @@ namespace VsmacHelper {
             optionVersionNumber.Validators.Add(new VsmacVersionValidator());
 
             this.OnExecute(() => {
-                // options
                 var logFolderRootPath = argLogFolderPath.HasValue()
                     ? argLogFolderPath.Value()
                     : Path.GetFullPath(Path.Combine(new PathHelper().GetHomeFolder(), "Library/Logs/VisualStudio/"));
@@ -35,18 +35,24 @@ namespace VsmacHelper {
                     ? optionVersionNumber.Value()
                     : "8.0";
 
-                Console.WriteLine($"in cleanlogfolder\tlogFolderRootPath: '{logFolderRootPath}'\tversion: {versionNumber}");
+                if (VerboseOption.HasValue()) {
+                    Console.WriteLine($"CleanLogFolder called with:\n\tlogFolderRootPath:\t{logFolderRootPath}\n\tversionNumber:\t\t{versionNumber}");
+                }
 
                 var logfolderfullpath = Path.GetFullPath(Path.Combine(logFolderRootPath, versionNumber));
 
                 var filesToDelete = Directory.GetFiles(logfolderfullpath, "*", SearchOption.TopDirectoryOnly);
 
+                if (filesToDelete.Length > 0) {
+                    if (VerboseOption.HasValue()) Console.WriteLine("Deleting the following files:");
 
-                if(VerboseOption.HasValue()) Console.WriteLine("Deleting the following files:");
-
-                foreach (var file in filesToDelete) {
-                    if (VerboseOption.HasValue()) Console.WriteLine($"\t{file}");
-                    File.Delete(file);
+                    foreach (var file in filesToDelete) {
+                        if (VerboseOption.HasValue()) Console.WriteLine($"\t{file}");
+                        File.Delete(file);
+                    }
+                }
+                else {
+                    Console.WriteLine($"No files to delete in folder: {logfolderfullpath}");
                 }
             });
         }
