@@ -7,20 +7,25 @@ namespace VsmacHelper {
     public class OpenLogFolderCommand : BaseCommandLineApplication {
         public OpenLogFolderCommand() : base("OpenLogFolder","Opens the log folder in Finder") {
             // options
-            var logFolderPath = this.Option("-p|--path", "Path to the log folder which will be opened. Default value: ~/Library/Logs/VisualStudio/", CommandOptionType.SingleOrNoValue);
-
+            var logFolderPath = this.Option("-p|--path", $"Path to the log folder which will be opened. Default value: '{KnownStrings.VsmacLogsFolderPath}'", CommandOptionType.SingleOrNoValue);
 
             this.OnExecute(async () => {
                 var logFolderPathFull = logFolderPath.HasValue()
-                    ? Path.GetFullPath(logFolderPath.Value())
-                    : Path.GetFullPath(Path.Combine(new PathHelper().GetHomeFolder(), "Library/Logs/VisualStudio/"));
+                    ? new PathHelper().GetFullPath(logFolderPath.Value())
+                    : new PathHelper().GetFullPath(KnownStrings.VsmacLogsFolderPath);
 
                 var openCommand = new CliCommand {
                     Command = "open",
                     Arguments = logFolderPathFull
                 };
 
-                _ = await openCommand.RunCommand();
+                if (VerboseOption.HasValue()) Console.WriteLine($"Opening log folder {logFolderPathFull}");
+
+                var cmdresult = await openCommand.RunCommand();
+                if (!string.IsNullOrEmpty(cmdresult.StandardError)) {
+                    Console.WriteLine($"Error: {cmdresult.StandardError}");
+                }
+
             });
         }
     }

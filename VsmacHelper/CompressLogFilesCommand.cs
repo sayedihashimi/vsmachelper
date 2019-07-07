@@ -12,7 +12,7 @@ namespace VsmacHelper {
             // command options
             var optionLogFolderPath = this.Option(
                 "-l|--logfolderroot <PATH>",
-                "defines that path to the root folder containg the log files. Default value: '~/Library/Logs/VisualStudio/'",
+                $"defines that path to the root folder containg the log files. Default value: '{KnownStrings.VsmacLogsFolderPath}'",
                 CommandOptionType.SingleValue);
 
             var optionVersionNumber = Option(
@@ -28,8 +28,8 @@ namespace VsmacHelper {
 
             this.OnExecute(() => {
                 string logfolder = optionLogFolderPath.HasValue()
-                    ? new PathHelper().GetFullpath(optionLogFolderPath.Value())
-                    : new PathHelper().GetFullpath(KnownStrings.VsmacLogsFolderPath);
+                    ? new PathHelper().GetFullPath(optionLogFolderPath.Value())
+                    : new PathHelper().GetFullPath(KnownStrings.VsmacLogsFolderPath);
 
                 string version = optionVersionNumber.HasValue()
                     ? optionVersionNumber.Value()
@@ -41,14 +41,14 @@ namespace VsmacHelper {
                     ? optionDestFilename.Value()
                     : $"ide-{version}-log-{DateTime.Now.ToString("yyyy.MM.dd.ss.ff")}.zip";
 
-                if (VerboseOption.ParsedValue) {
+                if (VerboseOption.HasValue()) {
                     Console.WriteLine($@"CompressLogFiles called with
     folder:    '{logfolder}'
     version:   '{version}'
     filename:  '{destfilename}'");
                 }
 
-                if (VerboseOption.ParsedValue) Console.WriteLine("Creating zip file now");
+                if (VerboseOption.HasValue()) Console.WriteLine("Creating zip file now");
 
                 System.IO.Compression.ZipFile.CreateFromDirectory(
                     Path.Combine(logfolder, version),

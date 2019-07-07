@@ -10,7 +10,7 @@ namespace VsmacHelper.Shared {
             return Path.GetFullPath(home);
         }
 
-        public string GetFullpath(string path) {
+        public string GetFullPath(string path) {
             if (string.IsNullOrWhiteSpace(path)) return null;
 
             var pathstr = path.Trim();

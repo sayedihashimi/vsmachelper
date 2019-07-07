@@ -17,7 +17,7 @@ namespace VsmacHelper {
             // command options
             var optionLogFolderPath = this.Option(
                 "-l|--logfolderroot <PATH>",
-                "defines that path to the root folder containg the log files. Default value: '~/Library/Logs/VisualStudio/'",
+                $"defines that path to the root folder containg the log files. Default value: '{KnownStrings.VsmacLogsFolderPath}'",
                 CommandOptionType.SingleValue);
 
             var optionVersionNumber = Option(
@@ -29,13 +29,13 @@ namespace VsmacHelper {
             this.OnExecute(() => {
                 var logFolderRootPath = optionLogFolderPath.HasValue()
                     ? optionLogFolderPath.Value()
-                    : Path.GetFullPath(Path.Combine(new PathHelper().GetHomeFolder(), "Library/Logs/VisualStudio/"));
+                    : new PathHelper().GetFullPath(KnownStrings.VsmacLogsFolderPath);
 
                 var versionNumber = optionVersionNumber.HasValue()
                     ? optionVersionNumber.Value()
                     : "8.0";
                 
-                if (VerboseOption.ParsedValue) {
+                if (VerboseOption.HasValue()) {
                     Console.WriteLine($"CleanLogFolder called with:\n\tlogFolderRootPath:\t{logFolderRootPath}\n\tversionNumber:\t\t{versionNumber}");
                 }
 
@@ -44,7 +44,7 @@ namespace VsmacHelper {
                 var filesToDelete = Directory.GetFiles(logfolderfullpath, "*", SearchOption.TopDirectoryOnly);
 
                 if (filesToDelete.Length > 0) {
-                    if (VerboseOption.ParsedValue) Console.WriteLine("Deleting the following files:");
+                    if (VerboseOption.HasValue()) Console.WriteLine("Deleting the following files:");
 
                     foreach (var file in filesToDelete) {
                         if (VerboseOption.HasValue()) Console.WriteLine($"\t{file}");
