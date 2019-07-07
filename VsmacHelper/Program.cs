@@ -13,13 +13,11 @@ namespace VsmacHelper
             app.Name = "vsmachelper";
             app.HelpOption(inherited:true);
             app.UsePagerForHelpText = false;
-            //app.OnExecute(() =>
-            //{
-            //    Console.WriteLine("in main execute");
-            //});
 
+            // add commands
             app.Commands.Add(new CleanLogFolderCommand());
             app.Commands.Add(new OpenLogFolderCommand());
+            app.Commands.Add(new CompressLogFilesCommand());
 
             app.Execute(args);
         }
