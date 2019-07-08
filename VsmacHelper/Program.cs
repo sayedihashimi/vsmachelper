@@ -20,7 +20,7 @@ namespace VsmacHelper
             app.Commands.Add(new CompressLogFilesCommand());
             app.Commands.Add(new OpenTelemetryLogsFolderCommand());
             app.Commands.Add(new CleanTelemetryLogsCommand());
-
+            app.Commands.Add(new EnableTelemetryFileLoggerCommand());
             app.Execute(args);
         }
     }
