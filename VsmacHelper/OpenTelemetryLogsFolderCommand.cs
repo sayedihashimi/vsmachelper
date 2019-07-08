@@ -10,7 +10,7 @@ namespace VsmacHelper {
             this.OnExecute(async () => {
                 var folderFullpath = telLogFolderPath.HasValue()
                     ? new PathHelper().GetFullPath(telLogFolderPath.Value())
-                    : new PathHelper().GetFullPath(KnownStrings.VsmacLogsFolderPath);
+                    : new PathHelper().GetFullPath(KnownStrings.TelemetryLogFolder);
 
                 var openCommand = new CliCommand {
                     Command = "open",
