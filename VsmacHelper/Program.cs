@@ -23,6 +23,8 @@ namespace VsmacHelper
             app.Commands.Add(new EnableTelemetryFileLoggerCommand());
             app.Commands.Add(new DisableTelemetryFileLoggerCommand());
             app.Commands.Add(new OpenTelemetryConfigFolder());
+            app.Commands.Add(new KillVsmacCommand());
+
             app.Execute(args);
         }
     }

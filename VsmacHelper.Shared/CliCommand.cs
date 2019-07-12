@@ -46,22 +46,22 @@ namespace VsmacHelper.Shared
             string stdout = null;
             string stderr = null;
             Exception exception = null;
-            Process cmdProcess = null;
+            // Process cmdProcess = null;
+            int exitCode = int.MinValue;
             try
             {
-                cmdProcess = Process.Start(startInfo);
+                using (var cmdProcess = Process.Start(startInfo)) {
 
-                if (TimeoutMilliseconds > 0)
-                {
-                    cmdProcess.WaitForExit(TimeoutMilliseconds);
+                    if (TimeoutMilliseconds > 0) {
+                        cmdProcess.WaitForExit(TimeoutMilliseconds);
+                    }
+                    else {
+                        cmdProcess.WaitForExit();
+                    }
+                    exitCode = cmdProcess.ExitCode;
+                    stdout = await cmdProcess.StandardOutput.ReadToEndAsync();
+                    stderr = await cmdProcess.StandardError.ReadToEndAsync();
                 }
-                else
-                {
-                    cmdProcess.WaitForExit();
-                }
-
-                stdout = await cmdProcess.StandardOutput.ReadToEndAsync();
-                stderr = await cmdProcess.StandardError.ReadToEndAsync();
             }
             catch(Exception ex)
             {
@@ -70,7 +70,7 @@ namespace VsmacHelper.Shared
 
             ICliCommandResult result = new CliCommandResult
             {
-                ExitCode = cmdProcess != null ? cmdProcess.ExitCode : -1,
+                ExitCode = exitCode,
                 StandardOutput = stdout,
                 StandardError = stderr,
                 Exception = exception

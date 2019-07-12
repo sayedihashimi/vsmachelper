@@ -10,5 +10,7 @@ namespace VsmacHelper.Shared {
         public static readonly string TelemetryLogFolder = Path.Combine(Path.GetTempPath(), "VSTelemetryLog");
         public static readonly string TelemetryConfigFolder = _pathHelper.GetFullPath(Path.Combine(_pathHelper.GetHomeFolder(), "VSTelemetry"));
         public const string TelemetryConfigFilename = "channels.json";
+
+        public const string VisualStudioProcessName = "VisualStudio";
     }
 }
