@@ -1,20 +1,13 @@
-using System;
-using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic;
 using VsmacHelper.Shared;
 using Xunit;
 
-namespace VsmacHelper.Tests
-{
-    public class CliCommandTests
-    {
+namespace VsmacHelper.Tests {
+    public class CliCommandTests {
         [Fact]
-        public async Task TestBasicPassingCommand()
-        {
-            CliCommand cmd = new CliCommand
-            {
-                Command ="dotnet",
+        public async Task TestBasicPassingCommand() {
+            CliCommand cmd = new CliCommand {
+                Command = "dotnet",
                 Arguments = "--version"
             };
 
@@ -27,10 +20,8 @@ namespace VsmacHelper.Tests
         }
 
         [Fact]
-        public async Task TestMissingCommand()
-        {
-            CliCommand cmd = new CliCommand
-            {
+        public async Task TestMissingCommand() {
+            CliCommand cmd = new CliCommand {
                 Command = "doesntexistsayedha",
                 Arguments = "something here"
             };
@@ -41,10 +32,8 @@ namespace VsmacHelper.Tests
         }
 
         [Fact]
-        public async Task TestInvalidArgsCommand()
-        {
-            var cmd = new CliCommand
-            {
+        public async Task TestInvalidArgsCommand() {
+            var cmd = new CliCommand {
                 Command = "dotnet",
                 Arguments = "invalidargshere"
             };

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace VsmacHelper.Shared
-{
-    public class CliCommand : ICliCommand
-    {
+namespace VsmacHelper.Shared {
+    public class CliCommand : ICliCommand {
         public string Command { get; set; }
         public string Arguments { get; set; }
         public string WorkingDirectory { get; set; } = Directory.GetCurrentDirectory();
@@ -18,10 +14,8 @@ namespace VsmacHelper.Shared
         public bool CreateNoWindow { get; set; } = true;
         public int TimeoutMilliseconds { get; set; }
 
-        public async Task<ICliCommandResult> RunCommand()
-        {
-            var startInfo = new ProcessStartInfo
-            {
+        public async Task<ICliCommandResult> RunCommand() {
+            var startInfo = new ProcessStartInfo {
                 FileName = Command,
                 CreateNoWindow = CreateNoWindow,
                 RedirectStandardOutput = true,
@@ -29,17 +23,14 @@ namespace VsmacHelper.Shared
                 WorkingDirectory = WorkingDirectory
             };
 
-            if (!string.IsNullOrWhiteSpace(Arguments))
-            {
+            if (!string.IsNullOrWhiteSpace(Arguments)) {
                 startInfo.Arguments = Arguments;
             }
 
-            if (!string.IsNullOrWhiteSpace(Username))
-            {
+            if (!string.IsNullOrWhiteSpace(Username)) {
                 startInfo.UserName = Username;
             }
-            if (!string.IsNullOrWhiteSpace(Password))
-            {
+            if (!string.IsNullOrWhiteSpace(Password)) {
                 startInfo.PasswordInClearText = Password;
             }
 
@@ -48,8 +39,7 @@ namespace VsmacHelper.Shared
             Exception exception = null;
             // Process cmdProcess = null;
             int exitCode = int.MinValue;
-            try
-            {
+            try {
                 using (var cmdProcess = Process.Start(startInfo)) {
 
                     if (TimeoutMilliseconds > 0) {
@@ -63,13 +53,11 @@ namespace VsmacHelper.Shared
                     stderr = await cmdProcess.StandardError.ReadToEndAsync();
                 }
             }
-            catch(Exception ex)
-            {
+            catch (Exception ex) {
                 exception = ex;
             }
 
-            ICliCommandResult result = new CliCommandResult
-            {
+            ICliCommandResult result = new CliCommandResult {
                 ExitCode = exitCode,
                 StandardOutput = stdout,
                 StandardError = stderr,
@@ -78,6 +66,6 @@ namespace VsmacHelper.Shared
             return result;
         }
 
-        
+
     }
 }
