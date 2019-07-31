@@ -17,7 +17,7 @@ namespace VsmacHelper
             // add commands
             app.Commands.Add(new CleanLogsCommand());
             app.Commands.Add(new OpenLogFolderCommand());
-            app.Commands.Add(new CompressLogFilesCommand());
+            app.Commands.Add(new CompressLogsCommand());
             app.Commands.Add(new OpenTelemetryLogsFolderCommand());
             app.Commands.Add(new CleanTelemetryLogsCommand());
             app.Commands.Add(new EnableTelemetryFileLoggerCommand());

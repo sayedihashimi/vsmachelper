@@ -4,9 +4,9 @@ using McMaster.Extensions.CommandLineUtils;
 using VsmacHelper.Shared;
 
 namespace VsmacHelper {
-    public class CompressLogFilesCommand : BaseCommandLineApplication {
-        public CompressLogFilesCommand() :
-            base("CompressLogFiles",
+    public class CompressLogsCommand : BaseCommandLineApplication {
+        public CompressLogsCommand() :
+            base("CompressLogs",
                 "This will create a .zip of the existing log files. The file will be created by default in the log directory") {
 
             // command options
