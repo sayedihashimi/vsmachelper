@@ -12,8 +12,8 @@ using VsmacHelper.Shared;
 using VsmacHelper.Shared.Extensions;
 
 namespace VsmacHelper {
-    public class CleanLogFolderCommand : BaseCommandLineApplication {
-        public CleanLogFolderCommand() : base("CleanLogFolder", "This will clean the log folder") {
+    public class CleanLogsCommand : BaseCommandLineApplication {
+        public CleanLogsCommand() : base("CleanLogs", "This will clean the log folder") {
             // command options
             var optionLogFolderPath = this.Option(
                 "-l|--logfolderroot <PATH>",

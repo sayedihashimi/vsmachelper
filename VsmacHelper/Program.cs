@@ -15,7 +15,7 @@ namespace VsmacHelper
             app.UsePagerForHelpText = false;
 
             // add commands
-            app.Commands.Add(new CleanLogFolderCommand());
+            app.Commands.Add(new CleanLogsCommand());
             app.Commands.Add(new OpenLogFolderCommand());
             app.Commands.Add(new CompressLogFilesCommand());
             app.Commands.Add(new OpenTelemetryLogsFolderCommand());

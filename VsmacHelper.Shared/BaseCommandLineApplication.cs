@@ -22,7 +22,7 @@ namespace VsmacHelper.Shared
         protected CommandOption<bool> VerboseOption { get; private set; }
         protected bool VerboseEnabled {
             get {
-                return VerboseOption.HasValue();
+                return VerboseOption != null && VerboseOption.HasValue();
             }
         }
     }
