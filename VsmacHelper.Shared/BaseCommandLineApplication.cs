@@ -1,20 +1,14 @@
-﻿using System;
-using System.Threading;
-using McMaster.Extensions.CommandLineUtils;
+﻿using McMaster.Extensions.CommandLineUtils;
 
-namespace VsmacHelper.Shared
-{
-    public class BaseCommandLineApplication : CommandLineApplication
-    {
-        public BaseCommandLineApplication(string name, string description,bool enableVerboseOption = true)
-        {
+namespace VsmacHelper.Shared {
+    public class BaseCommandLineApplication : CommandLineApplication {
+        public BaseCommandLineApplication(string name, string description, bool enableVerboseOption = true) {
             Name = name;
             Description = description;
             this.HelpOption();
             UsePagerForHelpText = false;
 
-            if (enableVerboseOption)
-            {
+            if (enableVerboseOption) {
                 VerboseOption = this.Option<bool>("--verbose", "Enable verbose logging", CommandOptionType.NoValue);
             }
         }

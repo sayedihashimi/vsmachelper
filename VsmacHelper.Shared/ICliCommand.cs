@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace VsmacHelper.Shared
-{
-    public interface ICliCommand
-    {
+namespace VsmacHelper.Shared {
+    public interface ICliCommand {
         string Command { get; set; }
         string Arguments { get; set; }
         string WorkingDirectory { get; set; }

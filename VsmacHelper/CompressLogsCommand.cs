@@ -1,6 +1,6 @@
-﻿using System;
+﻿using McMaster.Extensions.CommandLineUtils;
+using System;
 using System.IO;
-using McMaster.Extensions.CommandLineUtils;
 using VsmacHelper.Shared;
 
 namespace VsmacHelper {

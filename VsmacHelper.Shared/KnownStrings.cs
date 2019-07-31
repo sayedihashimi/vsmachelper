@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace VsmacHelper.Shared {
     public static class KnownStrings {
-        private static PathHelper _pathHelper = new PathHelper();
+        private static readonly PathHelper _pathHelper = new PathHelper();
         public const string DefaultVsmacVersion = "8.0";
         public const string VsmacLogsFolderPath = "~/Library/Logs/VisualStudio";
 

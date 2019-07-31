@@ -1,6 +1,6 @@
-﻿using System;
+﻿using McMaster.Extensions.CommandLineUtils;
+using System;
 using System.IO;
-using McMaster.Extensions.CommandLineUtils;
 using VsmacHelper.Shared;
 
 namespace VsmacHelper {
@@ -47,7 +47,7 @@ namespace VsmacHelper {
             return string.Format(_enableTelemetryLoggerConfigFileContents, FileLoggerConfigValue);
         }
 
-        private string _enableTelemetryLoggerConfigFileContents = @"{{
+        private readonly string _enableTelemetryLoggerConfigFileContents = @"{{
     ""fileLogger"": ""{0}""
 }}";
     }

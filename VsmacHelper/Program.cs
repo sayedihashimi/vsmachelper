@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using McMaster.Extensions.CommandLineUtils;
+﻿using McMaster.Extensions.CommandLineUtils;
 
-namespace VsmacHelper
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
+namespace VsmacHelper {
+    class Program {
+        static void Main(string[] args) {
             using var app = new CommandLineApplication();
             app.Name = "vsmachelper";
-            app.HelpOption(inherited:true);
+            app.HelpOption(inherited: true);
             app.UsePagerForHelpText = false;
 
             // add commands

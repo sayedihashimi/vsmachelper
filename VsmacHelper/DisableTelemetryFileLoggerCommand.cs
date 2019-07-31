@@ -1,5 +1,4 @@
-﻿using System;
-namespace VsmacHelper {
+﻿namespace VsmacHelper {
     public class DisableTelemetryFileLoggerCommand : BaseTelemetryFileLoggerCommand {
         public DisableTelemetryFileLoggerCommand() : base("DisableTelemetryFileLogger", "disables telemetry file logger") {
 

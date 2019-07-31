@@ -1,10 +1,10 @@
-﻿using System;
-using McMaster.Extensions.CommandLineUtils;
+﻿using McMaster.Extensions.CommandLineUtils;
+using System;
 using VsmacHelper.Shared;
 
 namespace VsmacHelper {
     public class OpenTelemetryLogsFolderCommand : BaseCommandLineApplication {
-        public OpenTelemetryLogsFolderCommand() : base("OpenTelemetryLogsFolder","opens the folder that contains the telemetry log files") {
+        public OpenTelemetryLogsFolderCommand() : base("OpenTelemetryLogsFolder", "opens the folder that contains the telemetry log files") {
             var telLogFolderPath = this.Option("-p|--path", $"opens the folder that contains the telemetry log files. Default value: '{KnownStrings.TelemetryLogFolder}'", CommandOptionType.SingleOrNoValue);
 
             this.OnExecute(async () => {

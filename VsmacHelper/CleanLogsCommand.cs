@@ -1,15 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
+﻿using McMaster.Extensions.CommandLineUtils;
+using System;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Sources;
-using McMaster.Extensions.CommandLineUtils;
-using McMaster.Extensions.CommandLineUtils.Validation;
 using VsmacHelper.Shared;
-using VsmacHelper.Shared.Extensions;
 
 namespace VsmacHelper {
     public class CleanLogsCommand : BaseCommandLineApplication {
@@ -34,7 +26,7 @@ namespace VsmacHelper {
                 var versionNumber = optionVersionNumber.HasValue()
                     ? optionVersionNumber.Value()
                     : "8.0";
-                
+
                 if (VerboseOption.HasValue()) {
                     Console.WriteLine($"CleanLogFolder called with:\n\tlogFolderRootPath:\t{logFolderRootPath}\n\tversionNumber:\t\t{versionNumber}");
                 }

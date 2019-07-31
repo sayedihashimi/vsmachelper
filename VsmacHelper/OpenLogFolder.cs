@@ -1,12 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using McMaster.Extensions.CommandLineUtils;
+﻿using McMaster.Extensions.CommandLineUtils;
 using VsmacHelper.Shared;
 
 namespace VsmacHelper {
     public class OpenLogFolderCommand : BaseCommandLineApplication {
-        public OpenLogFolderCommand() : base("OpenLogFolder","Opens the log folder in Finder") {
+        public OpenLogFolderCommand() : base("OpenLogFolder", "Opens the log folder in Finder") {
             // options
             var logFolderPath = this.Option(
                 "-p|--path",
