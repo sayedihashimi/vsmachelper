@@ -12,6 +12,6 @@ namespace VsmacHelper.Shared {
         bool CreateNoWindow { get; set; }
         int TimeoutMilliseconds { get; set; }
 
-        Task<ICliCommandResult> RunCommand();
+        Task<ICliCommandResult> RunCommand(bool captureStdOutput = false, bool captureStdError = false);
     }
 }

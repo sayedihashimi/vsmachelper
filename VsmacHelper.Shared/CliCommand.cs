@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace VsmacHelper.Shared {
@@ -14,12 +15,12 @@ namespace VsmacHelper.Shared {
         public bool CreateNoWindow { get; set; } = true;
         public int TimeoutMilliseconds { get; set; }
 
-        public async Task<ICliCommandResult> RunCommand() {
+        public async Task<ICliCommandResult> RunCommand(bool captureStdOutput = false, bool captureStdError = false) {
             var startInfo = new ProcessStartInfo {
                 FileName = Command,
                 CreateNoWindow = CreateNoWindow,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
+                RedirectStandardOutput = captureStdOutput,
+                RedirectStandardError = captureStdError,
                 WorkingDirectory = WorkingDirectory
             };
 
@@ -49,8 +50,10 @@ namespace VsmacHelper.Shared {
                         cmdProcess.WaitForExit();
                     }
                     exitCode = cmdProcess.ExitCode;
-                    stdout = await cmdProcess.StandardOutput.ReadToEndAsync();
-                    stderr = await cmdProcess.StandardError.ReadToEndAsync();
+
+                    if (captureStdOutput) { stdout = await cmdProcess.StandardOutput.ReadToEndAsync(); }
+                    if (captureStdError) { stderr = await cmdProcess.StandardError.ReadToEndAsync(); }
+                    
                 }
             }
             catch (Exception ex) {

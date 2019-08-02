@@ -5,6 +5,8 @@ namespace VsmacHelper.Shared {
         private static readonly PathHelper _pathHelper = new PathHelper();
         public const string DefaultVsmacVersion = "8.0";
         public const string VsmacLogsFolderPath = "~/Library/Logs/VisualStudio";
+        public static readonly string VsMacLogFilePath =
+            _pathHelper.GetFullPath(Path.Combine(VsmacLogsFolderPath, DefaultVsmacVersion, "Ide.log"));
 
         public static readonly string TelemetryLogFolder = Path.Combine(Path.GetTempPath(), "VSTelemetryLog");
         public static readonly string TelemetryConfigFolder = _pathHelper.GetFullPath(Path.Combine(_pathHelper.GetHomeFolder(), "VSTelemetry"));
