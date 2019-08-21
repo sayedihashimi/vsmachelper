@@ -19,6 +19,7 @@ namespace VsmacHelper {
             app.Commands.Add(new OpenTelemetryConfigFolder());
             app.Commands.Add(new KillVsmacCommand());
             app.Commands.Add(new TailLogFileCommand());
+            app.Commands.Add(new OpenInstallerLogsCommand());
 
             app.Execute(args);
         }
